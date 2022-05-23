@@ -48,14 +48,20 @@
   </thead>
   <tbody>
     <tr>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
+    {% set x = 0 %}
+      {% for x in 0..6 %}
+      {% if weeks[2] < 10 %}
+      {% set hour = '0' ~ weeks[2] %}
+      {% else %}
+      {% set hour = weeks[2] %}
+      {% endif %}
+      {% if weeks[3] < 10 %}
+      {% set min = '0' ~ weeks[3] %}
+      {% else %}
+      {% set min = weeks[3] %}
+      {% endif %}
+      <td>{{hour}}:{{min}}</td>
+      {% endfor %} 
     </tr>
   </tbody>
   </table>

@@ -39,28 +39,35 @@ class WeekRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Week[] Returns an array of Week objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('w')
-//            ->andWhere('w.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('w.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function getMaxId()
+    {
+        $query = $this->createQueryBuilder('u');
+        $query->select('u, MAX(id) as idMax');
+        return $query->getQuery()->getSingleResult();
+    }
 
-//    public function findOneBySomeField($value): ?Week
-//    {
-//        return $this->createQueryBuilder('w')
-//            ->andWhere('w.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    //    /**
+    //     * @return Week[] Returns an array of Week objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('w')
+    //            ->andWhere('w.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('w.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
+
+    //    public function findOneBySomeField($value): ?Week
+    //    {
+    //        return $this->createQueryBuilder('w')
+    //            ->andWhere('w.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 }
