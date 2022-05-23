@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Schedule - User Registration{% endblock %}
+
+{% block body %}
+
+<div class="container-fluid wrap">
+  {% if error %}
+        <div class="alert alert-danger text-center errno mx-auto">{{ error }}</div>
+{% endif %}  
+<div class="container login-form">
+    <form method="post" name="form" action="{{ path('register') }}">
+        <h2 class="text-center">Register</h2>
+        <div class="form-group d-flex flex-row justify-content-between">
+            <input type="text" class="form-control" placeholder="Name" required="required" id="form_name" name="form[nom]">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="text" class="form-control" placeholder="Forename" required="required" id="form_prenom" name="form[prenom]">
+        </div><br>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Username" required="required" id="form_username" name="form[username]">
+        </div>
+        <br>
+        <div class="form-group">
+            <input type="email" class="form-control" placeholder="Email" required="required" id="form_email" name="form[email]">
+        </div>
+        <br>
+        <div class="form-group d-flex flex-row justify-content-between">
+            <input type="text" class="form-control" placeholder="Civilite" required="required" id="form_civilite" name="form[civilite]">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="text" class="form-control" placeholder="Telephone" required="required" id="form_telephone" name="form[telephone]">
+        </div><br>
+        <div class="form-group">
+            <input type="password" class="form-control" placeholder="Password" required="required" id="form_password" name="form[password]">
+        </div>
+        <br>
+        <div class="form-group d-flex flex-row justify-content-between">
+            <button type="submit" class="btn btn-success btn-block">Register</button>
+            <label class="float-left form-check-label"><input type="checkbox" id="form_agreeTerms" name="form[agreeTerms]"> Agree With Terms</label>
+        </div>       
+    </form>
+</div>
+</div>
+
+<style type="text/css">
+.wrap{
+    height: 100vh;
+    padding-top: 10%;
+}
+.login-form {
+    width: 60%;
+  	font-size: 15px;
+}
+.login-form form {
+    margin-bottom: 15px;
+    padding: 5% 15% 5% 15%;
+}
+.login-form h2 {
+    margin: 0 0 15px;
+}
+.btn {
+    min-height: 50px;
+    min-width: 200px;
+    border-radius: 5%;
+    font-size: 15px;
+    font-weight: bold;
+}
+.accnt{
+    width: 60%;
+    color: #fff;
+    text-align: center;
+}
+.errno{
+    width: 20%;
+}
+</style>
+{% endblock %}

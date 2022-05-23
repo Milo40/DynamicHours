@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Schedule - Admin Login{% endblock %}
+
+{% block body %}
+
+<div class="container-fluid wrap">
+{% if error %}
+        <div class="alert alert-danger text-center errno mx-auto">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+{% endif %}
+<div class="container login-form">
+    <form action="{{ path('login') }}" method="post">
+        <h2 class="text-center">Log in</h2>       
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Username" required="required"  name="_username">
+        </div>
+        <br>
+        <div class="form-group">
+            <input type="password" class="form-control" placeholder="Password" required="required" id="password" name="_password">
+        </div>
+        <br>
+        <input type="hidden" name="_target_path" value="/forum"/>
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+        <div class="form-group d-flex flex-row justify-content-between">
+            <button type="submit" class="btn btn-success btn-block">Log in</button>
+            <label class="float-left form-check-label"><input type="checkbox"> Remember me</label>
+        </div>
+        <br><br>
+        <div class="clearfix">
+            <a href="#" class="float-right">Forgot Password?</a>
+        </div>        
+    </form>
+</div>
+</div>
+
+<style type="text/css">
+.wrap{
+    height: 100vh;
+    padding-top: 10%;
+}
+.login-form {
+    width: 25%;
+  	font-size: 15px;
+}
+.login-form form {
+    margin-bottom: 15px;
+    padding: 15% 15% 5% 15%;
+}
+.login-form h2 {
+    margin: 0 0 15px;
+}
+.btn {
+    min-height: 30px;
+    min-width: 100px;
+    border-radius: 5%;
+    font-size: 15px;
+    font-weight: bold;
+}
+.accnt{
+    width: 60%;
+    color: #fff;
+    text-align: center;
+}
+.errno{
+    width: 20%;
+}
+</style>
+{% endblock %}

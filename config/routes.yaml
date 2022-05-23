@@ -1,7 +1,22 @@
 controllers:
-    resource: ../src/Controller/
-    type: annotation
+  resource: ../src/Controller/
+  type: annotation
 
 kernel:
-    resource: ../src/Kernel.php
-    type: annotation
+  resource: ../src/Kernel.php
+  type: annotation
+
+home_page:
+  path: /
+  methods: ["GET"]
+  controller: App\Controller\UserDashboardController::index
+
+home_page_01:
+  path: /home
+  methods: ["GET"]
+  controller: App\Controller\UserDashboardController::index
+
+home_page_02:
+  path: /index
+  methods: ["GET"]
+  controller: App\Controller\UserDashboardController::index
