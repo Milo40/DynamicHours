@@ -3,6 +3,24 @@
 {% block title %}Schedule Dashboard{% endblock %}
 {% block body %}
 
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header"> 
+          <h4 class='modal-title'>Vous Avez Choisi</h4>
+        </div>
+        <div class="modal-body">
+          <p>Heure : <b id='hour'></b></p>
+          <p>Date : <b id='day'></b></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" id="mclose" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
 <nav class="navbar">
   <div class="container">
     <div class="navbar-header">
@@ -11,8 +29,8 @@
         <span></span>
         <span></span>
       </button>
-      <a href="#">
-        <h4>SAMPLE</h4>
+      <a href="{{ path('home_page') }}">
+        <h4>SCHEDULE</h4>
       </a>
     </div>
     <div class="navbar-menu" id="open-navbar1">
@@ -36,9 +54,9 @@
   </div>
 </nav>
 <br><br><br>
-<div class="container-fluid bg-success p-5">
+<div class="container-fluid bg-gray p-5">
 <div class="schedule">
-  <table class="table table-dark table-striped table-hover text-center">
+  <table class="table table-dark table-hover text-center">
   <thead>
     <tr>
       {% for day in days %}
@@ -47,24 +65,60 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
     {% set x = 0 %}
-      {% for x in 0..6 %}
-      {% if weeks[2] < 10 %}
-      {% set hour = '0' ~ weeks[2] %}
-      {% else %}
-      {% set hour = weeks[2] %}
-      {% endif %}
-      {% if weeks[3] < 10 %}
-      {% set min = '0' ~ weeks[3] %}
-      {% else %}
-      {% set min = weeks[3] %}
-      {% endif %}
-      <td>{{hour}}:{{min}}</td>
-      {% endfor %} 
+    {% set y = 0 %}
+    {% for x in range(0,range_size-1) %}
+    <tr>
+    {% if time_ranges[0][x][1] == 0 %}
+    <td data-time="{{ time_ranges[7][0][0] }} {{ time_ranges[7][0][1] }}" >--</td>
+    {% endif %}
+    {% if time_ranges[1][x][1] == 0 %}
+    <td data-time="{{ time_ranges[7][1][0] }} {{ time_ranges[7][1][1] }}" >--</td>
+    {% endif %}
+    {% if time_ranges[2][x][1] == 0 %}
+    <td data-time="{{ time_ranges[7][2][0] }} {{ time_ranges[7][2][1] }}" >--</td>
+    {% endif %}
+    {% if time_ranges[3][x][1] == 0 %}
+    <td data-time="{{ time_ranges[7][3][0] }} {{ time_ranges[7][3][1] }}" >--</td>
+    {% endif %}
+    {% if time_ranges[4][x][1] == 0 %}
+    <td data-time="{{ time_ranges[7][4][0] }} {{ time_ranges[7][4][1] }}" >--</td>
+    {% endif %}
+    {% if time_ranges[5][x][1] == 0 %}
+    <td data-time="{{ time_ranges[7][5][0] }} {{ time_ranges[7][5][1] }}" >--</td>
+    {% endif %}
+    {% if time_ranges[6][x][1] == 0 %}
+    <td data-time="{{ time_ranges[7][6][0] }} {{ time_ranges[7][6][1] }}" >--</td>
+    {% endif %}
+    {% if time_ranges[0][x][1] != 0 %}
+    <td data-time="{{ time_ranges[7][0][0] }} {{ time_ranges[7][0][1] }}">{{ time_ranges[0][x][0] }}</td>
+    {% endif %}
+    {% if time_ranges[1][x][1] != 0 %}
+    <td data-time="{{ time_ranges[7][1][0] }} {{ time_ranges[7][1][1] }}">{{ time_ranges[1][x][0] }}</td>
+    {% endif %}
+    {% if time_ranges[2][x][1] != 0 %}
+    <td data-time="{{ time_ranges[7][2][0] }} {{ time_ranges[7][2][1] }}">{{ time_ranges[2][x][0] }}</td>
+    {% endif %}
+    {% if time_ranges[3][x][1] != 0 %}
+    <td data-time="{{ time_ranges[7][3][0] }} {{ time_ranges[7][3][1] }}">{{ time_ranges[3][x][0] }}</td>
+    {% endif %}
+    {% if time_ranges[4][x][1] != 0 %}
+    <td data-time="{{ time_ranges[7][4][0] }} {{ time_ranges[7][4][1] }}">{{ time_ranges[4][x][0] }}</td>
+    {% endif %}
+    {% if time_ranges[5][x][1] != 0 %}
+    <td data-time="{{ time_ranges[7][5][0] }} {{ time_ranges[7][5][1] }}">{{ time_ranges[5][x][0] }}</td>
+    {% endif %}
+    {% if time_ranges[6][x][1] != 0 %}
+    <td data-time="{{ time_ranges[7][6][0] }} {{ time_ranges[7][6][1] }}">{{ time_ranges[6][x][0] }}</td>
+    {% endif %}
     </tr>
+    {% endfor %}
   </tbody>
   </table>
+</div>
+<div class="container-fluid flex">
+<button class="btn btn-primary px-5 py-3">Valider</button>
+<a href="{{ path('admin_dashboard') }}"><button class="btn btn-success px-5 py-3">Admin</button></a>
 </div>
 </div>
 
@@ -332,7 +386,16 @@ handleSmallScreens();
 
 <script>
 $(document).ready(function() {
-
+  $('td').click(function(){
+    $(this).addClass('active bg-success');
+    $(this).siblings().removeClass('active');
+    $('#hour').text($(this).text());
+    $('#day').text($(this).data('time'));
+    $("#myModal").modal("toggle");
+  });
+  $('#mclose').click(function(){
+    $('#myModal').modal("hide");
+  });
 });
 </script>
 {% endblock %}

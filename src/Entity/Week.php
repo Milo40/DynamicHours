@@ -39,6 +39,9 @@ class Week
     #[ORM\OneToMany(mappedBy: 'week_ID', targetEntity: Event::class)]
     private $events;
 
+    #[ORM\Column(type: 'boolean')]
+    private $is_holiday;
+
     public function __construct()
     {
         $this->events = new ArrayCollection();
@@ -159,6 +162,18 @@ class Week
                 $event->setWeekID(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isIsHoliday(): ?bool
+    {
+        return $this->is_holiday;
+    }
+
+    public function setIsHoliday(bool $is_holiday): self
+    {
+        $this->is_holiday = $is_holiday;
 
         return $this;
     }
